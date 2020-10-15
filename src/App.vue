@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 document.addEventListener('DOMContentLoaded', () => {
   const html = document.querySelector('html')
   let fontSize = window.innerWidth / 10
@@ -14,7 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 export default {
-
+  computed: {
+    ...mapGetters(['test'])
+  },
+  mounted () {
+    this.$store.dispatch('setTest', 20).then(() => {
+      console.log(this.test)
+    })
+  }
 }
 </script>
 
