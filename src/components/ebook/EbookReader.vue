@@ -5,23 +5,33 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { ebookMixin } from '../../utils/mixin'
 import Epub from 'epubjs'
 global.ePub = Epub
 export default {
+    mixins: [ebookMixin],
     methods: {
         prevPage () {
             if (this.rendition) {
                 this.rendition.prev()
+                if (this.menuVisible) {
+                    this.hideTitleAndMenu()
+                }
             }
         },
         nextPage () {
             if (this.rendition) {
                 this.rendition.next()
+                if (this.menuVisible) {
+                    this.hideTitleAndMenu()
+                }
             }
         },
         toggleTitleAndMenu () {
-
+            this.setMenuVisible(!this.menuVisible)
+        },
+        hideTitleAndMenu () {
+            this.setMenuVisible(false)
         },
         initEpub () {
             const url = `http://localhost:8081/epub/${this.fileName}.epub`
@@ -40,7 +50,6 @@ export default {
             this.rendition.on('touchend', event => {
                 const offsetX = event.changedTouches[0].clientX - this.touchStartX
                 const time = event.timeStamp - this.touchStartTime
-                console.log(offsetX, time)
                 if (offsetX > 40 && time < 500) {
                     this.prevPage()
                 } else if (offsetX < -40 && time < 500) {
@@ -52,12 +61,9 @@ export default {
             })
         }
     },
-    computed: {
-        ...mapGetters(['fileName'])
-    },
     mounted () {
         const fileName = this.$route.params.fileName.split('|').join('/')
-        this.$store.dispatch('setFileName', fileName).then(() => {
+        this.setFileName(fileName).then(() => {
             this.initEpub()
         })
     }
