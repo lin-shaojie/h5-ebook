@@ -5,6 +5,7 @@ import store from './store'
 import './assets/styles/icon.css'
 import './assets/styles/global.scss'
 import './assets/styles/mixin.scss'
+import './utils/vant'
 
 Vue.config.productionTip = false
 
