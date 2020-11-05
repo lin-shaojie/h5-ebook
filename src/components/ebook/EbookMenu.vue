@@ -1,29 +1,36 @@
 <template>
-      <transition name="slide-up">
-        <div class="menu-wrapper" :class="{'hide-box-shadow': !menuVisible}" v-show="menuVisible">
-            <div class="icon-wrapper">
-            <span class="icon-menu" @click="showSetting(3)"></span>
+    <div>
+        <transition name="slide-up">
+            <div class="menu-wrapper" :class="{'hide-box-shadow': !menuVisible || settingVisible >= 0 }" v-show="menuVisible">
+                <div class="icon-wrapper">
+                <span class="icon-menu" @click="showSetting(3)"></span>
+                </div>
+                <div class="icon-wrapper">
+                <span class="icon-progress" @click="showSetting(2)"></span>
+                </div>
+                <div class="icon-wrapper">
+                <span class="icon-bright" @click="showSetting(1)"></span>
+                </div>
+                <div class="icon-wrapper">
+                <span class="icon-A" @click="showSetting(0)"></span>
+                </div>
             </div>
-            <div class="icon-wrapper">
-            <span class="icon-progress" @click="showSetting(2)"></span>
-            </div>
-            <div class="icon-wrapper">
-            <span class="icon-bright" @click="showSetting(1)"></span>
-            </div>
-            <div class="icon-wrapper">
-            <span class="icon-A" @click="showSetting(0)"></span>
-            </div>
-        </div>
-    </transition>
+        </transition>
+        <ebook-setting-font></ebook-setting-font>
+    </div>
 </template>
 
 <script>
 import { ebookMixin } from '../../utils/mixin'
+import EbookSettingFont from './EbookSettingFont'
 export default {
     mixins: [ebookMixin],
+    components: {
+        EbookSettingFont
+    },
     methods: {
         showSetting (key) {
-            console.log(key)
+            this.setSettingVisible(key)
         }
     }
 }
@@ -39,10 +46,10 @@ left: 0;
 z-index: 100;
 display: flex;
 width: 100%;
-height: px2rem(46);
+height: 46px;
 background: white;
-font-size: px2rem(26);
-box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
+font-size: 26px;
+box-shadow: 0 -8px 8px rgba(0, 0, 0, .15);
 &.hide-box-shadow {
     box-shadow: none;
 }
@@ -50,10 +57,10 @@ box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
     flex: 1;
     @include center;
     .icon-progress {
-    font-size: px2rem(22);
+      font-size: 22px;
     }
     .icon-bright {
-    font-size: px2rem(22);
+     font-size: 22px;
     }
 }
 }

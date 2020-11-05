@@ -47,13 +47,13 @@ export default {
     display: flex;
     z-index: 100;
     width: 100%;
-    height: px2rem(46);
+    height: 46px;
     background-color: white;
-    font-size: px2rem(26);
-    box-shadow: 0 px2rem(8) px2rem(8) rgba(0, 0, 0, .15);
+    font-size: 26px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, .15);
     .left {
-        flex: 0 0 px2rem(40);
-        margin-left: px2rem(10);
+        flex: 0 0 40px;
+        margin-left: 10px;
          @include left;
     }
     .right {
@@ -61,7 +61,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         .icon-wrapper {
-            flex: 0 0 px2rem(42);
+            flex: 0 0 42px;
             @include left;
         }
     }
