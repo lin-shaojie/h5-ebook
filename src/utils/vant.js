@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import { Button, Slider } from 'vant'
+import { Icon, Button, Slider, Popup, Cell } from 'vant'
 
-Vue.use(Button).use(Slider)
+Vue.use(Button).use(Slider).use(Popup).use(Cell).use(Icon)

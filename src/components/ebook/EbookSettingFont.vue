@@ -1,14 +1,18 @@
 <template>
    <transition name="slide-up">
-     <div class="setting-wrapper" v-show="menuVisible && settingVisible === 0">
-          <span style="font-size:16px;">A</span>
-          <van-slider v-model="fontSize" @change="setFontSizeChange" :min="12" :max="24" :step="2"  >
-            <template #button>
-              <div class="custom-button">{{ fontSize }}</div>
-            </template>
-          </van-slider>
-          <span style="font-size:22px;">A</span>
-     </div>
+        <div class="setting-wrapper" v-show="menuVisible && settingVisible === 0">
+            <div class="font-size-setting">
+              <span style="font-size:16px;">A</span>
+              <van-slider v-model="fontSize" @change="setFontSizeChange" :min="12" :max="24" :step="2"  >
+                <template #button>
+                  <div class="custom-button">{{ fontSize }}</div>
+                </template>
+              </van-slider>
+              <span style="font-size:22px;">A</span>
+            </div>
+             <van-cell class="font-family" is-link @click="showPopup">系统字体</van-cell>
+             <van-popup v-model="show" round position="bottom" :style="{ height: '40%' }" />
+        </div>
    </transition>
 </template>
 
@@ -19,7 +23,8 @@ export default {
   mixins: [ebookMixin],
   data () {
     return {
-      fontSize: 16
+      fontSize: 16, // 字体大小
+      show: false
     }
   },
 
@@ -33,6 +38,9 @@ export default {
     setFontSizeChange (value) {
       this.fontSize = value
       this.currentBook.rendition.themes.fontSize(`${this.fontSize}PX`)
+    },
+    showPopup () {
+      this.show = !this.show
     }
   }
 }
@@ -46,11 +54,21 @@ export default {
     left: 0;
     z-index: 99;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
-    height: 58px;
+    height: 70px;
     background: white;
     box-shadow: 0 -8px 8px rgba(0, 0, 0, .15);
+    .font-size-setting {
+       display: flex;
+       flex-direction: row;
+       width: 100%;
+      @include center;
+    }
+    .font-family {
+      margin-top: 10px;
+      font-size: 18px;
+    }
   }
   span {
     margin: 0 18px;
