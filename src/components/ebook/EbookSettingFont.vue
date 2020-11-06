@@ -56,17 +56,18 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 70px;
+    height: 100px;
     background: white;
     box-shadow: 0 -8px 8px rgba(0, 0, 0, .15);
     .font-size-setting {
        display: flex;
        flex-direction: row;
        width: 100%;
+       margin-top: 10px;
       @include center;
     }
     .font-family {
-      margin-top: 10px;
+      margin: 10px 15px 0px 15px;
       font-size: 18px;
     }
   }

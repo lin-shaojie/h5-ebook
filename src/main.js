@@ -6,7 +6,6 @@ import './assets/styles/icon.css'
 import './assets/styles/global.scss'
 import './assets/styles/mixin.scss'
 import './utils/vant'
-import 'vant/lib/index.css'
 
 Vue.config.productionTip = false
 
