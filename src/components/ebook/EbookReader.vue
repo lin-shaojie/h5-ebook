@@ -64,6 +64,14 @@ export default {
                 }
                 event.stopPropagation()
             })
+            this.rendition.hooks.content.register(contents => { // 为阅读器框架层面添加事件
+                Promise.all([
+                    contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/cabin.css`),
+                    contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/daysOne.css`),
+                    contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/montserrat.css`),
+                    contents.addStylesheet(`${process.env.VUE_APP_RES_URL}fonts/tangerine.css`)
+                ]).then(() => { console.log('111') })
+            })
         }
     },
     mounted () {

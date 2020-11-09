@@ -3,15 +3,16 @@
         <div class="setting-wrapper" v-show="menuVisible && settingVisible === 0">
             <div class="font-size-setting">
               <span style="font-size:16px;">A</span>
-              <van-slider v-model="fontSize" @change="setFontSizeChange" :min="12" :max="24" :step="2"  >
+              <van-slider v-model="fontSize" @change="setFontSizeChange" :min="12" :max="26" :step="2"  >
                 <template #button>
                   <div class="custom-button">{{ fontSize }}</div>
                 </template>
               </van-slider>
               <span style="font-size:22px;">A</span>
             </div>
-             <van-cell class="font-family" is-link @click="showPopup">系统字体</van-cell>
-             <van-popup v-model="show" round position="bottom" :style="{ height: '40%' }" />
+            <van-dropdown-menu direction="up" active-color="#1989fa"  >
+              <van-dropdown-item v-model="fontFamily" :options="fontFamilyList" @change="setFontFamily" />
+            </van-dropdown-menu>
         </div>
    </transition>
 </template>
@@ -24,7 +25,15 @@ export default {
   data () {
     return {
       fontSize: 16, // 字体大小
-      show: false
+      show: false,
+      fontFamily: 'Default',
+      fontFamilyList: [
+        { text: 'Default', value: 'Default' },
+        { text: 'Cabin', value: 'Cabin' },
+        { text: 'Days One', value: 'Days One' },
+        { text: 'Montserrat', value: 'Montserrat' },
+        { text: 'Tangerine', value: 'Tangerine' }
+      ]
     }
   },
 
@@ -41,6 +50,13 @@ export default {
     },
     showPopup () {
       this.show = !this.show
+    },
+    setFontFamily (value) {
+      if (value === 'Default') {
+           this.currentBook.rendition.themes.font('Times new Roman')
+      } else {
+           this.currentBook.rendition.themes.font(value)
+      }
     }
   }
 }
@@ -70,6 +86,15 @@ export default {
       margin: 10px 15px 0px 15px;
       font-size: 18px;
     }
+    .van-dropdown-menu {
+      width:100%;
+      margin-top: 16px;
+      ::v-deep .van-dropdown-menu__bar {
+          height: 15px;
+          box-shadow: none;
+      }
+    }
+
   }
   span {
     margin: 0 18px;
