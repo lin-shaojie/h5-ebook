@@ -19,13 +19,13 @@
 
 <script>
 import { ebookMixin } from '../../utils/mixin'
+import { getFontFamily, getFontSize, saveFontFamily, saveFontSize } from '../../utils/locatStorage'
 export default {
   name: 'EbookSettingFont',
   mixins: [ebookMixin],
   data () {
     return {
       fontSize: 16, // 字体大小
-      show: false,
       fontFamily: 'Default',
       fontFamilyList: [
         { text: 'Default', value: 'Default' },
@@ -41,22 +41,36 @@ export default {
 
   computed: {},
 
-  mounted () {},
+  mounted () {
+    // 初始化字体
+    const fontFamily = getFontFamily(this.fileName)
+    const fontSize = getFontSize(this.fileName)
+    if (fontFamily) {
+      this.fontFamily = fontFamily
+    }
+    if (fontFamily) {
+      this.fontSize = fontSize
+    }
+  },
 
   methods: {
     setFontSizeChange (value) {
       this.fontSize = value
       this.currentBook.rendition.themes.fontSize(`${this.fontSize}PX`)
+      saveFontSize(this.fileName, value)
     },
     showPopup () {
       this.show = !this.show
     },
     setFontFamily (value) {
       if (value === 'Default') {
-           this.currentBook.rendition.themes.font('Times new Roman')
+          this.fontFamily = 'Times new Roman'
+          this.currentBook.rendition.themes.font('Times new Roman')
       } else {
-           this.currentBook.rendition.themes.font(value)
+          this.currentBook.rendition.themes.font(value)
+          this.fontFamily = value
       }
+      saveFontFamily(this.fileName, value)
     }
   }
 }

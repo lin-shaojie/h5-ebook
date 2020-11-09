@@ -7,6 +7,7 @@
 <script>
 import { ebookMixin } from '../../utils/mixin'
 import Epub from 'epubjs'
+import { getFontFamily, getFontSize, saveFontFamily } from '../../utils/locatStorage'
 global.ePub = Epub
 export default {
     mixins: [ebookMixin],
@@ -46,7 +47,18 @@ export default {
                 height: window.innerHeight,
                 methods: 'default'
             })
-            this.rendition.display()
+            this.rendition.display().then(() => { // 电子书初始化
+                const fontFamily = getFontFamily(this.fileName)
+                const fontSize = getFontSize(this.fileName)
+                if (!fontFamily) {
+                    // 保存一个默认字体
+                    saveFontFamily(this.fileName, 'Default')
+                } else {
+                    // 设置获取缓存中的字体
+                    this.book.rendition.themes.font(fontFamily)
+                }
+                    this.book.rendition.themes.fontSize(`${fontSize}PX`)
+            })
             this.rendition.on('touchstart', event => {
                 this.touchStartX = event.changedTouches[0].clientX
                 this.touchStartTime = event.timeStamp
