@@ -52,7 +52,7 @@ export default {
                 const fontSize = getFontSize(this.fileName)
                 if (!fontFamily) {
                     // 保存一个默认字体
-                    saveFontFamily(this.fileName, 'Default')
+                    saveFontFamily(this.fileName, 'Times new Roman')
                 } else {
                     // 设置获取缓存中的字体
                     this.book.rendition.themes.font(fontFamily)

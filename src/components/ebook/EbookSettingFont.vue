@@ -26,9 +26,9 @@ export default {
   data () {
     return {
       fontSize: 16, // 字体大小
-      fontFamily: 'Default',
+      fontFamily: 'Times new Roman',
       fontFamilyList: [
-        { text: 'Default', value: 'Default' },
+        { text: 'Default', value: 'Times new Roman' },
         { text: 'Cabin', value: 'Cabin' },
         { text: 'Days One', value: 'Days One' },
         { text: 'Montserrat', value: 'Montserrat' },
@@ -63,13 +63,8 @@ export default {
       this.show = !this.show
     },
     setFontFamily (value) {
-      if (value === 'Default') {
-          this.fontFamily = 'Times new Roman'
-          this.currentBook.rendition.themes.font('Times new Roman')
-      } else {
-          this.currentBook.rendition.themes.font(value)
-          this.fontFamily = value
-      }
+      this.currentBook.rendition.themes.font(value)
+      this.fontFamily = value
       saveFontFamily(this.fileName, value)
     }
   }
