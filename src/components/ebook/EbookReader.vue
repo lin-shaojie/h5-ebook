@@ -7,7 +7,7 @@
 <script>
 import { ebookMixin } from '../../utils/mixin'
 import Epub from 'epubjs'
-import { getFontFamily, getFontSize, saveFontFamily } from '../../utils/locatStorage'
+import { getFontFamily, getFontSize, saveFontFamily } from '../../utils/localStorage'
 global.ePub = Epub
 export default {
     mixins: [ebookMixin],

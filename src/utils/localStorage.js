@@ -67,3 +67,11 @@ export function getFontSize (fileName) {
 export function saveFontSize (fileName, fontSize) {
     return setBookObject(fileName, 'fontSize', fontSize)
 }
+
+export function getLocale () {
+    return getLocalStorage('locale')
+}
+
+export function saveLocale (locale) {
+    return setLocalStorage('locale', locale)
+}

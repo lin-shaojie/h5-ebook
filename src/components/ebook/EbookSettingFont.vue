@@ -19,7 +19,7 @@
 
 <script>
 import { ebookMixin } from '../../utils/mixin'
-import { getFontFamily, getFontSize, saveFontFamily, saveFontSize } from '../../utils/locatStorage'
+import { getFontFamily, getFontSize, saveFontFamily, saveFontSize } from '../../utils/localStorage'
 export default {
   name: 'EbookSettingFont',
   mixins: [ebookMixin],
