@@ -1,10 +1,26 @@
 import { mapGetters, mapActions } from 'vuex'
+import { themeList } from './book'
 
 export const ebookMixin = {
-    methods: {
-        ...mapActions(['setFileName', 'setMenuVisible', 'setSettingVisible', 'setCurrentBook'])
-    },
-    computed: {
-        ...mapGetters(['fileName', 'menuVisible', 'settingVisible', 'currentBook'])
+  computed: {
+    ...mapGetters([
+      'fileName',
+      'menuVisible',
+      'settingVisible',
+      'currentBook',
+      'defaultTheme'
+    ]),
+    themeList () {
+      return themeList(this)
     }
+  },
+  methods: {
+    ...mapActions([
+      'setFileName',
+      'setMenuVisible',
+      'setSettingVisible',
+      'setCurrentBook',
+      'setDefaultTheme'
+    ])
+  }
 }

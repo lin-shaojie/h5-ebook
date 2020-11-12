@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import {
+  Col,
+  Row,
   Icon,
   Button,
   Slider,
@@ -20,3 +22,5 @@ Vue.use(Button)
   .use(DropdownMenu)
   .use(DropdownItem)
   .use(Divider)
+  .use(Col)
+  .use(Row)

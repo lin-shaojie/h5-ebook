@@ -1,9 +1,12 @@
 <template>
     <transition name="slide-up">
         <div class="setting-wrapper" v-show="menuVisible && settingVisible === 1">
-            <div class="font-size-setting">
-                123
-            </div>
+          <van-row gutter="10">
+             <van-col span="6"  v-for="(item, index) in themeList" :key="index" class="themeItmes" @click="setThemes(index)">
+               <div class="preview" :style="{background: item.style.body.background}" :class="{'selected': item.name === defaultTheme}"></div>
+               <div class="text" :class="{'selected': item.name === defaultTheme }">{{item.alias}}</div>
+             </van-col>
+          </van-row>
         </div>
    </transition>
 </template>
@@ -15,17 +18,19 @@ import { ebookMixin } from '../../utils/mixin'
     mixins: [ebookMixin],
     data () {
       return {
-          show: true
       }
     },
-
-    components: {},
 
     computed: {},
 
     mounted () {},
 
-    methods: {}
+    methods: {
+      setThemes (index) {
+        const theme = this.themeList[index].name
+        this.setDefaultTheme(theme)
+      }
+    }
 
   }
 
@@ -38,18 +43,28 @@ import { ebookMixin } from '../../utils/mixin'
     bottom: 46px;
     left: 0;
     z-index: 99;
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     height: 100px;
     background: white;
     box-shadow: 0 -8px 8px rgba(0, 0, 0, .15);
-    .font-size-setting {
-       display: flex;
+    .themeItmes {
        flex-direction: row;
-       width: 100%;
-       margin-top: 10px;
-      @include center;
+       text-align: center;
+        .preview {
+          width: 80px;
+          height: 50px;
+          &.selected {
+            box-shadow: 0 px2rem(4) px2rem(6) 0 rgba(0, 0, 0, .1);
+          }
+        }
+        .text {
+          margin-top: 10px;
+          font-size: 16px;
+           &.selected {
+            font-weight: bold;
+          }
+        }
     }
 
   }

@@ -41,7 +41,8 @@ export default {
         initEpub () {
             const url = `http://localhost:8081/epub/${this.fileName}.epub`
             this.book = new Epub(url)
-            this.setCurrentBook(this.book)
+            this.setCurrentBook(this.book) // 设为全局变量
+            // 渲染电子书阅读器
             this.rendition = this.book.renderTo('read', {
                 width: window.innerWidth,
                 height: window.innerHeight,
@@ -57,7 +58,12 @@ export default {
                     // 设置获取缓存中的字体
                     this.book.rendition.themes.font(fontFamily)
                 }
-                    this.book.rendition.themes.fontSize(`${fontSize}PX`)
+                this.book.rendition.themes.fontSize(`${fontSize}PX`)
+                this.themeList.forEach(theme => {
+                    this.rendition.themes.register(theme.name, theme.style)
+                })
+                console.log(this.book)
+                console.log(this.rendition)
             })
             this.rendition.on('touchstart', event => {
                 this.touchStartX = event.changedTouches[0].clientX
